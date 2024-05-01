@@ -82,7 +82,11 @@ void* load_dat(char *filename)
                         myfile << unit.Name << "," << g->data.unitNames[unit.BaseID] << endl; 
                         g->data.unitMap[unit.BaseID] = unit;
                         g->data.nameMap[unit.Name] = unit.BaseID;
-                    }
+                    } else {
+                        myfile << unit.Name << "," << unit.BaseID << endl; 
+                    } 
+
+                    
                 }
             }
         }
@@ -113,10 +117,6 @@ int get_unit(void* ptr, char *unit_name)
     
     for (genie::unit::AttackOrArmor armor : unit.Type50.Armours) {
         cout << "Armor : " << g->data.armorNames[armor.Class]<< ", "<< armor.Class << " => "  << armor.Amount << endl;
-    }
-    
-    for (genie::unit::AttackOrArmor attack : unit.Type50.Attacks) {
-        cout << "Attack : " << g->data.armorNames[attack.Class] <<  ", "  << attack.Class << " => "  << attack.Amount << endl;
     }
     
     return 0;

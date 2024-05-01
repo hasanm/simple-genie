@@ -1,3 +1,4 @@
+    "1": "Legionary"
     "4": "Archer"
     "5": "Hand Cannoneer"
     "6": "Elite Skirmisher"
