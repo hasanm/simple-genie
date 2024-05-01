@@ -30,32 +30,32 @@ void* load_dat(char *filename)
 {
     MyGenie *g = new MyGenie;
     ofstream myfile;
-    try { 
+    try {
         myfile.open(UNITS_FILENAME);
         g->df = new genie::DatFile();
         g->df->setGameVersion(genie::GV_LatestDE2);
-        
+
         g->df->load(filename);
-        
+
         int i = 0;
         std::set<std::uint32_t> used;
-        
-        
+
+
         for (genie::Civ civ : g->df->Civs) {
             if (civ.Name != "Gaia") {
                 long unitsize = civ.Units.size();
                 long unitctr = 0;
-                
+
                 for (genie::Unit unit : civ.Units) {
                     unitctr++;
-                    
+
                     if (used.find(unit.BaseID) != used.end()) {
                         continue;
                     } else {
                         used.insert(unit.BaseID);
                     }
-                    
-                    
+
+
                     if ((unit.BaseID == 38
                          || unit.BaseID == 4
                          || unit.BaseID == 6
@@ -79,14 +79,14 @@ void* load_dat(char *filename)
                         i++;
                         // cout << "---------------" << endl;
                         // cout << unit.Name << ", " << g->data.unitNames[unit.BaseID] << ", Speed: " << unit.Speed << endl;
-                        myfile << unit.Name << "," << g->data.unitNames[unit.BaseID] << endl; 
+                        myfile << unit.Name << "," << g->data.unitNames[unit.BaseID] << endl;
                         g->data.unitMap[unit.BaseID] = unit;
                         g->data.nameMap[unit.Name] = unit.BaseID;
                     } else {
-                        myfile << unit.Name << "," << unit.BaseID << endl; 
-                    } 
+                        myfile << unit.Name << "," << unit.BaseID << endl;
+                    }
 
-                    
+
                 }
             }
         }
@@ -94,18 +94,18 @@ void* load_dat(char *filename)
     } catch(const exception& e) {
         cout << "Caught Exception " << endl;
         cerr << e.what();
-        return g; 
-    } 
-    
-    return g; 
+        return g;
+    }
+
+    return g;
 }
 
 int get_unit(void* ptr, char *unit_name)
 {
     MyGenie *g = static_cast<MyGenie*> (ptr);
-    
+
     string s (unit_name);
-    std::uint32_t id = g->data.nameMap[s]; 
+    std::uint32_t id = g->data.nameMap[s];
     cout << unit_name << ", " << id << endl;
 
     genie::Unit unit = g->data.unitMap[id];
@@ -114,13 +114,13 @@ int get_unit(void* ptr, char *unit_name)
     for (genie::unit::AttackOrArmor attack : unit.Type50.Attacks) {
         cout << "Attack : " << g->data.armorNames[attack.Class] <<  ", "  << attack.Class << " => "  << attack.Amount << endl;
     }
-    
+
     for (genie::unit::AttackOrArmor armor : unit.Type50.Armours) {
         cout << "Armor : " << g->data.armorNames[armor.Class]<< ", "<< armor.Class << " => "  << armor.Amount << endl;
     }
-    
+
     return 0;
-} 
+}
 
 
 
@@ -129,6 +129,6 @@ int print_all(void* ptr)
     MyGenie *g = static_cast<MyGenie*> (ptr);
     for (auto i : g->data.nameMap) {
         cout << i.first << endl;
-    } 
+    }
     return 0;
 }
