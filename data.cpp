@@ -16,7 +16,7 @@ Data::Data()
 {
   QString classFileName(":/resources/class.txt");
   QString unitFileName (":/resources/units.txt");
-  QString whiteListFileName (":/resources/whitelist.txt");  
+  QString whiteListFileName (":/resources/whitelist.txt");
 
 
   armors = readFile(classFileName);
@@ -24,7 +24,7 @@ Data::Data()
   whiteLists = readFile(whiteListFileName);
 
   for (auto token : armors){
-    armorNames[token.first] = token.second; 
+    armorNames[token.first] = token.second;
   }
 
   for (auto token : units) {
@@ -46,10 +46,10 @@ Data::~Data() {
 vector<pair<int, string>> Data::readFile(QString fileName)
 {
   QFile file (fileName);
-  vector <pair <int, string>> result; 
+  vector <pair <int, string>> result;
 
   if (!file.open(QIODevice::ReadOnly)) {
-      // qDebug() << fileName << " not found"; 
+      // qDebug() << fileName << " not found";
   } else {
       // qDebug() << fileName << " opened";
 
@@ -61,7 +61,7 @@ vector<pair<int, string>> Data::readFile(QString fileName)
   }
 
   file.close();
-  return result; 
+  return result;
 }
 
 pair<int, string> Data::tokenize(QString in)
@@ -81,6 +81,5 @@ pair<int, string> Data::tokenize(QString in)
 
   pair <int, string> result = make_pair(stoi(first), second);
 
-  return result; 
+  return result;
 }
-

@@ -5,11 +5,10 @@ using namespace std;
 
 
 MyGenie::MyGenie() {
-    
+
 }
 
 
-int MyGenie::load(char *filename) { 
-    return 0; 
+int MyGenie::load(char *filename) {
+    return 0;
 }
-

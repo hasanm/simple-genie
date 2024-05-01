@@ -22,46 +22,46 @@ char* get_machine()
 {
     static char machine[MAXSIZE];
     size_t len = sizeof(machine);
-    
+
     return machine;
 }
 
 int load_dat(void* ptr, char *filename)
 {
     MyGenie *g = static_cast<MyGenie*> (ptr);
-    
+
     g->df = new genie::DatFile();
     g->df->setGameVersion(genie::GV_LatestDE2);
-    
+
     g->df->load(filename);
 
     int i = 0;
     std::set<std::uint32_t> used;
 
-    Data data; 
-    
-    
-    
+    Data data;
+
+
+
     for (genie::Civ civ : g->df->Civs) {
         if (civ.Name != "Gaia") {
             long unitsize = civ.Units.size();
             long unitctr = 0;
-            
+
             for (genie::Unit unit : civ.Units) {
                 unitctr++;
-                
+
                 if (used.find(unit.BaseID) != used.end()) {
-                    continue; 
+                    continue;
                 } else {
                     used.insert(unit.BaseID);
                 }
-                
-                
+
+
                 if ((unit.BaseID == 38
                      || unit.BaseID == 4
                      || unit.BaseID == 6
                      || unit.BaseID == 7
-                     || unit.BaseID == 8                 
+                     || unit.BaseID == 8
                      || unit.BaseID == 93
                      || unit.BaseID == 358
                      || unit.BaseID == 359
@@ -83,10 +83,10 @@ int load_dat(void* ptr, char *filename)
                     data.unitMap[unit.BaseID] = unit;
                     data.nameMap[unit.Name] = unit.BaseID;
                 }
-                
+
             }
-        } 
-    }    
-    
+        }
+    }
+
     return 0;
 }

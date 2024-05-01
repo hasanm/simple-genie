@@ -22,21 +22,21 @@ class Data {
 
   map<std::uint32_t, genie::Unit> unitMap;
   map<std::string, std::uint32_t> nameMap;
-  map<std::uint32_t, int> whiteListMap;  
+  map<std::uint32_t, int> whiteListMap;
 
  private:
-  
+
   /* Members */
   vector<pair <int, string> > armors;
   vector<pair <int, string> > units;
-  vector<pair <int, string> > whiteLists;  
-  
+  vector<pair <int, string> > whiteLists;
+
 
   /* Functions */
   vector< pair<int, string> > readFile(QString fileName);
   pair<int, string> tokenize(QString s);
-  
 
-}; 
+
+};
 
 #endif

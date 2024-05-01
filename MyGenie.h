@@ -14,7 +14,7 @@ class MyGenie {
 
     int load(char* filename);
 
-    genie::DatFile *df; 
+    genie::DatFile *df;
 
 };
 
