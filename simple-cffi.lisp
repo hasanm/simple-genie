@@ -56,9 +56,11 @@
            (let ()
              (get-unit handle u))))))
 (defparameter *my-g* (my-load "/data/empires2_x2_p1.dat"))
-(my-get-unit *my-g* "GHULAM")
 (print-all *my-g*)
+(my-get-unit *my-g* "GHULAM")
+(my-get-unit *my-g* "ARCHR")
 
-;; (sb-ext:exit)
+
+(sb-ext:exit)
 
 
