@@ -3,17 +3,26 @@ cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD_11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-project(simple VERSION 1.0 LANGUAGES CXX)
-
-find_package(OpenCV REQUIRED )
+project(simple-genie VERSION 1.0 LANGUAGES CXX)
 
 
+if (APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14") #For OSX
+else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++") #For Ubuntu
+endif (APPLE)
 
-add_library(simple SHARED MyContainer.cpp simple.cpp)
 
-target_include_directories(simple PUBLIC
+add_subdirectory(genieutils EXCLUDE_FROM_ALL)
+include_directories(
+        "genieutils/include"
+        "."
+)
+add_library(${CMAKE_PROJECT_NAME} SHARED simple.cpp)
+
+target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
                            "${PROJECT_BINARY_DIR}"
-                           "${OpenCV_INCLUDE_DIRS}")
+                           )
 
 
-target_link_libraries(simple "${OpenCV_LIBS}")
+target_link_libraries(${CMAKE_PROJECT_NAME} genieutils)
