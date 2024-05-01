@@ -2,6 +2,7 @@
 #define DATA_H
 
 #include <set>
+#include <map>
 #include <QString>
 
 

@@ -22,7 +22,7 @@ include_directories(
         "genieutils/include"
         "."
 )
-add_library(${CMAKE_PROJECT_NAME} SHARED simple.cpp data.cpp qt-genie.qrc)
+add_library(${CMAKE_PROJECT_NAME} SHARED data.cpp MyGenie.cpp simple.cpp   qt-genie.qrc)
 
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
                            "${PROJECT_BINARY_DIR}"

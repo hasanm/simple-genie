@@ -2,6 +2,8 @@
 #define MY_GENIE_H
 
 #include<vector>
+#include "genie/dat/DatFile.h"
+#include "data.h"
 
 using namespace std;
 
@@ -12,7 +14,8 @@ class MyGenie {
 
     int load(char* filename);
 
- private:
+    genie::DatFile *df; 
+
 };
 
 #endif

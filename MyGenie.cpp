@@ -1,13 +1,15 @@
-#include "MyContainer.h"
+#include "MyGenie.h"
+#include<vector>
+
 using namespace std;
 
 
-MyContainer::MyContainer() {
+MyGenie::MyGenie() {
     
 }
 
 
-int MyContainer::load(char *filename, int color_mode) {
+int MyGenie::load(char *filename) { 
     return 0; 
 }
 

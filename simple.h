@@ -5,6 +5,7 @@
 extern "C" {
 #endif
     char* get_machine();
+    int load_dat(void* container, char *filename);
 
 #ifdef __cplusplus
 }
