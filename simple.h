@@ -5,7 +5,9 @@
 extern "C" {
 #endif
     char* get_machine();
-    int load_dat(void* container, char *filename);
+    void* load_dat(char *filename);
+    int print_all(void* ptr);
+    int get_unit(void* ptr, char *unit_name);
 
 #ifdef __cplusplus
 }

@@ -31,20 +31,34 @@
   (make-instance 'my-genie :pointer ptr))
 
 
-(cffi:defcfun "load_dat" :int
-  (handle my-genie)
+(cffi:defcfun "load_dat" my-genie
   (filename :pointer))
 
+(cffi:defcfun "get_unit" :int
+  (handle my-genie)
+  (unitname :pointer))
+
+(cffi:defcfun "print_all" :int
+  (handle my-genie))
 
 (defun my-load (filename)
-  (let ((handle (make-instance 'my-genie)))
+  (let ()
     (unwind-protect
          (cffi:with-foreign-string (f filename)
            (let ()
-             (load-dat handle f)
-             handle)))))
+             (load-dat f))))))
 
-(my-load "/data/empires2_x2_p1.dat")
 
-(sb-ext:exit)
+(defun my-get-unit (handle unit-name)
+  (let ()
+    (unwind-protect
+         (cffi:with-foreign-string (u unit-name)
+           (let ()
+             (get-unit handle u))))))
+(defparameter *my-g* (my-load "/data/empires2_x2_p1.dat"))
+(my-get-unit *my-g* "GHULAM")
+(print-all *my-g*)
+
+;; (sb-ext:exit)
+
 

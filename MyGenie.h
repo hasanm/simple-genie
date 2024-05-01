@@ -16,6 +16,8 @@ class MyGenie {
 
     genie::DatFile *df;
 
+    Data data;
+
 };
 
 #endif

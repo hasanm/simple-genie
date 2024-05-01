@@ -26,9 +26,9 @@ char* get_machine()
     return machine;
 }
 
-int load_dat(void* ptr, char *filename)
+void* load_dat(char *filename)
 {
-    MyGenie *g = static_cast<MyGenie*> (ptr);
+    MyGenie *g = new MyGenie;
 
     g->df = new genie::DatFile();
     g->df->setGameVersion(genie::GV_LatestDE2);
@@ -38,7 +38,7 @@ int load_dat(void* ptr, char *filename)
     int i = 0;
     std::set<std::uint32_t> used;
 
-    Data data;
+
 
 
 
@@ -75,18 +75,54 @@ int load_dat(void* ptr, char *filename)
                      || unit.BaseID == 1234
                      || unit.BaseID == 1747
                      || unit.BaseID == 1007
-                     || (data.whiteListMap.find(unit.BaseID) != data.whiteListMap.end())
+                     || (g->data.whiteListMap.find(unit.BaseID) != g->data.whiteListMap.end())
                      )) {
                     i++;
-                    cout << "---------------" << endl;
-                    cout << unit.Name << ", " << data.unitNames[unit.BaseID] << ", Speed: " << unit.Speed << endl;
-                    data.unitMap[unit.BaseID] = unit;
-                    data.nameMap[unit.Name] = unit.BaseID;
+                    // cout << "---------------" << endl;
+                    // cout << unit.Name << ", " << g->data.unitNames[unit.BaseID] << ", Speed: " << unit.Speed << endl;
+                    g->data.unitMap[unit.BaseID] = unit;
+                    g->data.nameMap[unit.Name] = unit.BaseID;
                 }
-
             }
         }
     }
 
+    return g; 
+}
+
+int get_unit(void* ptr, char *unit_name)
+{
+    MyGenie *g = static_cast<MyGenie*> (ptr);
+    
+    string s (unit_name);
+    std::uint32_t id = g->data.nameMap[s]; 
+    cout << unit_name << ", " << id << endl;
+
+    genie::Unit unit = g->data.unitMap[id];
+
+
+    for (genie::unit::AttackOrArmor attack : unit.Type50.Attacks) {
+        cout << "Attack : " << g->data.armorNames[attack.Class] <<  ", "  << attack.Class << " => "  << attack.Amount << endl;
+    }
+    
+    for (genie::unit::AttackOrArmor armor : unit.Type50.Armours) {
+        cout << "Armor : " << g->data.armorNames[armor.Class]<< ", "<< armor.Class << " => "  << armor.Amount << endl;
+    }
+    
+    for (genie::unit::AttackOrArmor attack : unit.Type50.Attacks) {
+        cout << "Attack : " << g->data.armorNames[attack.Class] <<  ", "  << attack.Class << " => "  << attack.Amount << endl;
+    }
+    
+    return 0;
+} 
+
+
+
+int print_all(void* ptr)
+{
+    MyGenie *g = static_cast<MyGenie*> (ptr);
+    for (auto i : g->data.nameMap) {
+        cout << i.first << endl;
+    } 
     return 0;
 }
