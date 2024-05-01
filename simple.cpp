@@ -7,6 +7,7 @@
 #include <map>
 #include <vector>
 #include "simple.h"
+#include "data.h"
 
 using namespace std;
 

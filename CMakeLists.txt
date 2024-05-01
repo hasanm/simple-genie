@@ -18,7 +18,7 @@ include_directories(
         "genieutils/include"
         "."
 )
-add_library(${CMAKE_PROJECT_NAME} SHARED simple.cpp)
+add_library(${CMAKE_PROJECT_NAME} SHARED simple.cpp data.cpp)
 
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
                            "${PROJECT_BINARY_DIR}"
