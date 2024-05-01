@@ -8,6 +8,7 @@
 #include <vector>
 #include "simple.h"
 #include "data.h"
+#include "ids.h"
 
 using namespace std;
 

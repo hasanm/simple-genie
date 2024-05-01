@@ -1,5 +1,4 @@
 #include <iostream>
-#include <QtWidgets>
 #include <QString>
 #include <QFile>
 #include <set>
@@ -50,9 +49,9 @@ vector<pair<int, string>> Data::readFile(QString fileName)
   vector <pair <int, string>> result; 
 
   if (!file.open(QIODevice::ReadOnly)) {
-    qDebug() << fileName << " not found"; 
+      // qDebug() << fileName << " not found"; 
   } else {
-    qDebug() << fileName << " opened";
+      // qDebug() << fileName << " opened";
 
     while (!file.atEnd()){
       QByteArray line = file.readLine();

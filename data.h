@@ -2,6 +2,7 @@
 #define DATA_H
 
 #include <set>
+#include <QString>
 
 
 #include "genie/dat/DatFile.h"
