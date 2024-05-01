@@ -14,7 +14,8 @@
 (cffi:defctype genie-pointer :pointer)
 
 (defclass my-genie ()
-  ((pointer :initform '()
+  ((pointer :initform (cffi:foreign-alloc :char :count 1
+                                     :initial-element 0)
             :initarg :pointer)))
 
 (cffi:define-foreign-type my-genie-type ()
@@ -44,7 +45,6 @@
              handle)))))
 
 (my-load "/data/empires2_x2_p1.dat")
-
 
 (sb-ext:exit)
 
